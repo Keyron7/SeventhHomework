@@ -1,6 +1,8 @@
 package com.example.seventhhomework.fragment;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -53,7 +55,7 @@ public class Firstfragment extends Fragment implements View.OnClickListener
 
         try {
             Intent intent = new Intent(Intent.ACTION_CALL);
-            intent.setData(Uri.parse("tel"+number));
+            intent.setData(Uri.parse("tel:"+number));
             startActivity(intent);
         } catch (SecurityException e) {
             e.printStackTrace();
@@ -61,14 +63,45 @@ public class Firstfragment extends Fragment implements View.OnClickListener
 
     }
 
+    private void sendMessage(String number){
+
+        try {
+            Uri uri = Uri.parse("smsto://"+number);
+            Intent intent = new Intent(Intent.ACTION_SENDTO,uri);
+            startActivity(intent);
+        } catch (SecurityException e){
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void onClick(View v) {
         TextView textView = v.findViewById(R.id.item_name);
-        String number = textView.getText().toString();
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            callPhone(number);
-        }else {
-            Toast.makeText(getActivity(),"请重新打开应用以获取权限",Toast.LENGTH_SHORT).show();
-        }
+        final String number = textView.getText().toString();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("执行方式：");
+        builder.setMessage("请选择执行方式");
+        builder.setPositiveButton("打电话", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(),"请重新打开应用以获取权限",Toast.LENGTH_SHORT).show();
+                }else {
+                    callPhone(number);
+                }
+            }
+        });
+        builder.setNegativeButton("发短信", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getActivity(),"请重新打开应用以获取权限",Toast.LENGTH_SHORT).show();
+                }else {
+                    sendMessage(number);
+                }
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }

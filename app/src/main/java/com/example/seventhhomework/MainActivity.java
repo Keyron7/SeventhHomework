@@ -38,16 +38,18 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager =findViewById(R.id.viewpager);
         viewPager.setAdapter(new ViewpagerAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-//            Log.d("123","123");
-        ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.CALL_PHONE}, 1106);
-
-//        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+        ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+        }
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.SEND_SMS}, 2);
+        }
     }
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
-            case 1106:
+            case 1:
+            case 2:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Toast.makeText(this, "申请权限成功", Toast.LENGTH_SHORT).show();
                 } else {
