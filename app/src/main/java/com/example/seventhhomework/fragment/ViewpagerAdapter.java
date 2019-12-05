@@ -1,0 +1,44 @@
+package com.example.seventhhomework.fragment;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+
+public class ViewpagerAdapter extends FragmentPagerAdapter {
+    public ViewpagerAdapter(@NonNull FragmentManager fm) {
+        super(fm);
+    }
+
+    @NonNull
+    @Override
+     public CharSequence getPageTitle(int position){
+        if (0 == position){
+            return "呼入电话";
+        }else if (1 == position){
+            return "呼出电话";
+        }else if (2 == position){
+            return "未接电话";
+        }
+        return null;
+    }
+    public Fragment getItem(int position) {
+        if (0 == position){
+        Fragment firstfragement = new Firstfragment();
+        return firstfragement;}
+        else if (1 == position){
+            Fragment secondfragment = new Secondfragment();
+            return secondfragment;
+        }
+        else if (2 == position){
+            Fragment thirdfragment = new Thirdfragment();
+            return thirdfragment;
+        }
+        return null;
+    }
+
+    @Override
+    public int getCount() {
+        return 3;
+    }
+}
