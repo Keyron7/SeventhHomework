@@ -23,12 +23,8 @@ import com.example.seventhhomework.recycleview.Linkman;
 import com.example.seventhhomework.recycleview.RvAdapter;
 import java.util.ArrayList;
 public class Firstfragment extends Fragment implements View.OnClickListener
-
-
 {
-    public View view;
-    public RecyclerView recyclerView1;
-    private RvAdapter rvAdapter;
+    private View view;
     private ArrayList<Linkman>linkmen = new ArrayList<>();
 
     @Nullable
@@ -40,13 +36,13 @@ public class Firstfragment extends Fragment implements View.OnClickListener
         return view;
     }
     private void initData(){
-        Linkman linkman1 = new Linkman("123456789","10:11");
-        for (int i = 0;i<20;i++){
-        linkmen.add(linkman1); }
-        }
+        for (int i = 10;i<40;i++){
+            Linkman linkman1 = new Linkman("YZ","10:"+i,"123456789123",R.drawable.touxiang);
+            linkmen.add(linkman1); }
+    }
     private void initRecyclerView(){
-        recyclerView1=(RecyclerView) view.findViewById(R.id.rv_firstcall);
-        rvAdapter = new RvAdapter(getActivity(),linkmen);
+        RecyclerView recyclerView1 =  view.findViewById(R.id.rv_firstcall);
+        RvAdapter rvAdapter = new RvAdapter(getActivity(), linkmen);
         recyclerView1.setAdapter(rvAdapter);
         recyclerView1.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         rvAdapter.setOnItemClickListener(this);
@@ -76,7 +72,7 @@ public class Firstfragment extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View v) {
-        TextView textView = v.findViewById(R.id.item_name);
+        TextView textView = v.findViewById(R.id.item_number);
         final String number = textView.getText().toString();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("执行方式：");

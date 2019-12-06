@@ -5,23 +5,17 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TableLayout;
+
 import android.widget.Toast;
 
 import com.example.seventhhomework.fragment.ViewpagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(new ViewpagerAdapter(getSupportFragmentManager()));
         tabLayout.setupWithViewPager(viewPager);
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-        ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+            ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.CALL_PHONE}, 1);
         }
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions( this, new String[]{Manifest.permission.SEND_SMS}, 2);

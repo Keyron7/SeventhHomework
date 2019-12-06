@@ -12,7 +12,7 @@ public class ViewpagerAdapter extends FragmentPagerAdapter {
 
     @NonNull
     @Override
-     public CharSequence getPageTitle(int position){
+    public CharSequence getPageTitle(int position){
         if (0 == position){
             return "呼入电话";
         }else if (1 == position){
@@ -24,15 +24,12 @@ public class ViewpagerAdapter extends FragmentPagerAdapter {
     }
     public Fragment getItem(int position) {
         if (0 == position){
-        Fragment firstfragement = new Firstfragment();
-        return firstfragement;}
+            return new Firstfragment();}
         else if (1 == position){
-            Fragment secondfragment = new Secondfragment();
-            return secondfragment;
+            return new Secondfragment();
         }
         else if (2 == position){
-            Fragment thirdfragment = new Thirdfragment();
-            return thirdfragment;
+            return new Thirdfragment();
         }
         return null;
     }

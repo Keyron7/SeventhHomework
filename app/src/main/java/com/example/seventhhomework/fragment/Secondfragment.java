@@ -26,27 +26,25 @@ import java.util.ArrayList;
 
 public class Secondfragment extends Fragment implements View.OnClickListener{
 
-    public View view;
-    public RecyclerView recyclerView2;
-    private RvAdapter rvAdapter;
+    private View view;
     private ArrayList<Linkman> linkmen = new ArrayList<>();
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view =inflater.inflate(R.layout.fragment2,container,false);
+        view =inflater.inflate(R.layout.fragment2,container,false);
         initData();
         initRecyclerView();
         return view;
     }
+
     private void initData(){
-        Linkman linkman1 = new Linkman("123456789","10:11");
-        for (int i = 0;i<20;i++){
+        for (int i = 10;i<40;i++){
+            Linkman linkman1 = new Linkman("YZ","10:"+i,"98765432198",R.drawable.touxiang);
             linkmen.add(linkman1); }
     }
     private void initRecyclerView(){
-        recyclerView2=(RecyclerView) view.findViewById(R.id.rv_sencondcall);
-        rvAdapter = new RvAdapter(getActivity(),linkmen);
+        RecyclerView recyclerView2 =  view.findViewById(R.id.rv_sencondcall);
+        RvAdapter rvAdapter = new RvAdapter(getActivity(), linkmen);
         recyclerView2.setAdapter(rvAdapter);
         recyclerView2.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         rvAdapter.setOnItemClickListener(this);
@@ -76,7 +74,7 @@ public class Secondfragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        TextView textView = v.findViewById(R.id.item_name);
+        TextView textView = v.findViewById(R.id.item_number);
         final String number = textView.getText().toString();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("执行方式：");

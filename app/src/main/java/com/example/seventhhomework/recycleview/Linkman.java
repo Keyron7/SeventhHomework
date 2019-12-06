@@ -1,29 +1,34 @@
 package com.example.seventhhomework.recycleview;
+
+
 public class Linkman{
-    public String name;
-    public String time;
-    public Linkman(){}
-    public Linkman(String name,String time){
+    private String name;
+    private String time;
+    private String number;
+    private int img;
+    public Linkman(String name,String time,String number,int img){
         this.name=name;
         this.time=time;
+        this.number=number;
+        this.img=img;
     }
 
-    public String getName() {
+    int getImg() {
+        return img;
+    }
+
+    String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    String getNumber() {
+        return number;
     }
 
-
-    public String getTime() {
+    String getTime() {
         return time;
     }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
 
     public String toString(){
         return "name"+name+"time"+time;

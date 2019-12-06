@@ -24,28 +24,33 @@ import com.example.seventhhomework.recycleview.RvAdapter;
 
 import java.util.ArrayList;
 
-public class Thirdfragment extends Fragment implements View.OnClickListener{
-    public View view;
-    public RecyclerView recyclerView1;
-    private RvAdapter rvAdapter;
+public class Thirdfragment extends Fragment implements View.OnClickListener {
+    private View view;
     private ArrayList<Linkman> linkmen = new ArrayList<>();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment3,container,false);
-        initData();
-        initRecyclerView();
+        view = inflater.inflate(R.layout.fragment3,container,false);
         return view;
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+        initRecyclerView();
+
+    }
+
     private void initData(){
-        Linkman linkman1 = new Linkman("123456789","10:11");
-        for (int i = 0;i<20;i++){
+        for (int i = 10;i<40;i++){
+            Linkman linkman1 = new Linkman("YZ","10:"+i,"66666666666",R.drawable.touxiang);
             linkmen.add(linkman1); }
     }
     private void initRecyclerView(){
-        recyclerView1=(RecyclerView) view.findViewById(R.id.rv_thirdcall);
-        rvAdapter = new RvAdapter(getActivity(),linkmen);
+        RecyclerView recyclerView1 =  view.findViewById(R.id.rv_thirdcall);
+        RvAdapter rvAdapter = new RvAdapter(getActivity(), linkmen);
         recyclerView1.setAdapter(rvAdapter);
         recyclerView1.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL,false));
         rvAdapter.setOnItemClickListener(this);
@@ -75,7 +80,7 @@ public class Thirdfragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        TextView textView = v.findViewById(R.id.item_name);
+        TextView textView = v.findViewById(R.id.item_number);
         final String number = textView.getText().toString();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("执行方式：");
